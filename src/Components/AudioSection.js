@@ -9,8 +9,7 @@ function AudioSection(props) {
     ringtone.play();
   } else {
     ringtone.pause();
-    console.log("Stoooooooooooop");
-    
+    console.log("Stooooooogitooop");
   }
 
   if (alarmRing) {
