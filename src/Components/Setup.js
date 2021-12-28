@@ -18,21 +18,21 @@ function Setup(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setStartTime(setupTime);
+    setStartTime(parseInt(setupTime));
     //setDisplayedTime(setupTime);
     setRunning(false);
   }
 
   function handleSubmitResting(event) {
     event.preventDefault();
-    setStartRestingTime(setupRestingTime);
+    setStartRestingTime(parseInt(setupRestingTime));
     //setDisplayedTime(setupRestingTime);
     setRunning(false);
   }
 
   function handleSubmitNbSessions(event) {
     event.preventDefault();
-    setNbSessions(setupNbSessions);
+    setNbSessions(parseInt(setupNbSessions));
     //setDisplayedTime(setupNbSessions); Affichera le nb de sessions
     setRunning(false);
   }

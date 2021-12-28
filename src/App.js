@@ -58,7 +58,18 @@ function App() {
     }
   });
 
-  if (currentSession <= nbSessions) {
+  if (currentSession === nbSessions && workOrPauseState === "pause") {
+    return (
+      <div>
+        <img
+          src="https://images.caradisiac.com/logos/4/6/6/4/194664/S0-fiat-chrysler-annonce-des-milliers-d-emplois-aux-etats-unis-111938.jpg"
+          style={{ width: "1080px", height: "auto" }}
+          alt="Trump photo"
+        />
+        <AudioSection alarmRing={alarmRing}></AudioSection>
+      </div>
+    );
+  } else {
     return (
       <div className="App">
         <Timer toDisplay={displayedTime} workOrPauseState={workOrPauseState} />
@@ -80,17 +91,6 @@ function App() {
           startRestingTime={startRestingTime}
           nbSessions={nbSessions}
           setNbSessions={setNbSessions}
-        />
-        <AudioSection alarmRing={alarmRing}></AudioSection>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <img
-          src="https://images.caradisiac.com/logos/4/6/6/4/194664/S0-fiat-chrysler-annonce-des-milliers-d-emplois-aux-etats-unis-111938.jpg"
-          style={{ width: "1080px", height: "auto" }}
-          alt="Trump photo"
         />
         <AudioSection alarmRing={alarmRing}></AudioSection>
       </div>
