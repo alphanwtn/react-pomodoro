@@ -4,9 +4,13 @@ import Player from "./Components/Player";
 import Timer from "./Components/Timer";
 import Setup from "./Components/Setup";
 import AudioSection from "./Components/AudioSection";
+import Sessions from "./Components/Sessions";
 
 function App() {
   const [startTime, setStartTime] = useState(25);
+  const [startRestingTime, setStartRestingTime] = useState(5);
+  const [nbSessions, setNbSessions] = useState(4);
+  const [currentSession, setCurrentSession] = useState(1);
   const [displayedTime, setDisplayedTime] = useState(startTime);
   const [running, setRunning] = useState(false);
   const [alarmRing, setAlarmRing] = useState(false);
@@ -24,41 +28,74 @@ function App() {
   useEffect(() => {
     // ######## RINGTONE (buggy)
     if (displayedTime === 0) {
+      setRunning(false);
       setAlarmRing(true);
-      console.log("setallarm");
+      console.log("setalarm");
+      return () => setAlarmRing(false);
     } else if (displayedTime === startTime) {
       setAlarmRing(false);
-      console.log("stopallarm");
+      console.log("stopalarm");
     }
   });
 
-  /*   useEffect(() => {
-    if (displayedTime === 0 && workOrPauseState == "work") {
-      setAlarmRing(true);
-    } else if (displayedTime === startTime) {
-      setAlarmRing(false);
+  useEffect(() => {
+    // ######## SWITCHING WORK / PAUSE State
+    if (
+      running === false &&
+      workOrPauseState === "work" &&
+      displayedTime === 0
+    ) {
+      setWorkOrPauseState("pause");
+      setDisplayedTime(startRestingTime);
+    } else if (
+      running === false &&
+      workOrPauseState === "pause" &&
+      displayedTime === 0
+    ) {
+      setWorkOrPauseState("work");
+      setDisplayedTime(startTime);
+      setCurrentSession(currentSession + 1);
     }
-  }); */
+  });
 
-  return (
-    <div>
-      <Timer toDisplay={displayedTime} running={running} />
-      <Player
-        running={running}
-        setDisplayedTime={setDisplayedTime}
-        setRunning={setRunning}
-        startTime={startTime}
-        workOrPauseState={workOrPauseState}
-      />
-      <Setup
-        setDisplayedTime={setDisplayedTime}
-        setRunning={setRunning}
-        setStartTime={setStartTime}
-        startTime={startTime}
-      />
-      <AudioSection alarmRing={alarmRing}></AudioSection>
-    </div>
-  );
+  if (currentSession <= nbSessions) {
+    return (
+      <div className="App">
+        <Timer toDisplay={displayedTime} workOrPauseState={workOrPauseState} />
+        <Sessions currentSession={currentSession} nbSessions={nbSessions} />
+        <Player
+          running={running}
+          setDisplayedTime={setDisplayedTime}
+          setRunning={setRunning}
+          startTime={startTime}
+          workOrPauseState={workOrPauseState}
+        />
+
+        <Setup
+          setDisplayedTime={setDisplayedTime}
+          setRunning={setRunning}
+          setStartTime={setStartTime}
+          startTime={startTime}
+          setStartRestingTime={setStartRestingTime}
+          startRestingTime={startRestingTime}
+          nbSessions={nbSessions}
+          setNbSessions={setNbSessions}
+        />
+        <AudioSection alarmRing={alarmRing}></AudioSection>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <img
+          src="https://images.caradisiac.com/logos/4/6/6/4/194664/S0-fiat-chrysler-annonce-des-milliers-d-emplois-aux-etats-unis-111938.jpg"
+          style={{ width: "1080px", height: "auto" }}
+          alt="Trump photo"
+        />
+        <AudioSection alarmRing={alarmRing}></AudioSection>
+      </div>
+    );
+  }
 }
 
 export default App;
