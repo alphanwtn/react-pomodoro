@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Setup(props) {
   const {
-    setRunning,
+    workOrPauseState,
     startTime,
     setStartTime,
     setDisplayedTime,
@@ -12,80 +12,55 @@ function Setup(props) {
     setNbSessions,
   } = props;
 
-  const [setupTime, setSetupTime] = useState(startTime);
-  const [setupRestingTime, setSetupRestingTime] = useState(startRestingTime);
-  const [setupNbSessions, setSetupNbSessions] = useState(nbSessions);
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    setStartTime(parseInt(setupTime));
-    //setDisplayedTime(setupTime);
-    setRunning(false);
-  }
-
-  function handleSubmitResting(event) {
-    event.preventDefault();
-    setStartRestingTime(parseInt(setupRestingTime));
-    //setDisplayedTime(setupRestingTime);
-    setRunning(false);
-  }
-
-  function handleSubmitNbSessions(event) {
-    event.preventDefault();
-    setNbSessions(parseInt(setupNbSessions));
-    //setDisplayedTime(setupNbSessions); Affichera le nb de sessions
-    setRunning(false);
-  }
-
   function handleChange(event) {
-    setSetupTime(event.target.value);
+    setStartTime(parseInt(event.target.value));
+    if (workOrPauseState === "work") {
+      setDisplayedTime(parseInt(event.target.value));
+    }
   }
 
   function handleChangeResting(event) {
-    setSetupRestingTime(event.target.value);
+    setStartRestingTime(parseInt(event.target.value));
+    if (workOrPauseState === "pause") {
+      setDisplayedTime(parseInt(event.target.value));
+    }
   }
 
   function handleChangeNbSessions(event) {
-    setSetupNbSessions(event.target.value);
+    setNbSessions(parseInt(event.target.value));
   }
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label name="worktime">Work Time :</label>
-        <input
-          onChange={handleChange}
-          type="number"
-          name="worktime"
-          min="1"
-          max="25"
-        ></input>
-        <button type="submit">Update</button>
-      </form>
+      <label name="worktime">Work Time :</label>
+      <input
+        value={startTime}
+        onChange={handleChange}
+        type="number"
+        name="worktime"
+        min="1"
+        max="25"
+      ></input>
 
-      <form onSubmit={handleSubmitResting}>
-        <label name="restingtime">Resting Time :</label>
-        <input
-          onChange={handleChangeResting}
-          type="number"
-          name="restingtime"
-          min="1"
-          max="25"
-        ></input>
-        <button type="submit">Update</button>
-      </form>
+      <label name="restingtime">Resting Time :</label>
+      <input
+        value={startRestingTime}
+        onChange={handleChangeResting}
+        type="number"
+        name="restingtime"
+        min="1"
+        max="25"
+      ></input>
 
-      <form onSubmit={handleSubmitNbSessions}>
-        <label name="nbsessions">Sessions Number :</label>
-        <input
-          onChange={handleChangeNbSessions}
-          type="number"
-          name="nbsessions"
-          min="1"
-          max="10"
-        ></input>
-        <button type="submit">Update</button>
-      </form>
+      <label name="nbsessions">Sessions Number :</label>
+      <input
+        value={nbSessions}
+        onChange={handleChangeNbSessions}
+        type="number"
+        name="nbsessions"
+        min="1"
+        max="10"
+      ></input>
     </div>
   );
 }

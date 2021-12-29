@@ -1,7 +1,14 @@
 import React from "react";
 
 function Player(props) {
-  const { setRunning, setDisplayedTime, startTime, workOrPauseState } = props;
+  const {
+    setRunning,
+    setDisplayedTime,
+    startTime,
+    workOrPauseState,
+    setWorkOrPauseState,
+    setCurrentSession,
+  } = props;
 
   return (
     <div>
@@ -13,6 +20,8 @@ function Player(props) {
         onClick={() => {
           setRunning(false);
           setDisplayedTime(startTime);
+          setWorkOrPauseState("work");
+          setCurrentSession(1);
         }}
       >
         Restart

@@ -80,11 +80,13 @@ function App() {
           setRunning={setRunning}
           startTime={startTime}
           workOrPauseState={workOrPauseState}
+          setWorkOrPauseState={setWorkOrPauseState}
+          setCurrentSession={setCurrentSession}
         />
 
         <Setup
           setDisplayedTime={setDisplayedTime}
-          setRunning={setRunning}
+          workOrPauseState={workOrPauseState}
           setStartTime={setStartTime}
           startTime={startTime}
           setStartRestingTime={setStartRestingTime}
