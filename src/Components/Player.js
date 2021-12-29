@@ -10,22 +10,20 @@ function Player(props) {
     setCurrentSession,
   } = props;
 
+  function restartPomodoro() {
+    setRunning(false);
+    setDisplayedTime(startTime);
+    setWorkOrPauseState("work");
+    setCurrentSession(1);
+  }
+
   return (
     <div>
       <button onClick={() => setRunning(true)}>
         Start {workOrPauseState === "work" ? "Working" : "Resting"}
       </button>
       <button onClick={() => setRunning(false)}>Pause</button>
-      <button
-        onClick={() => {
-          setRunning(false);
-          setDisplayedTime(startTime);
-          setWorkOrPauseState("work");
-          setCurrentSession(1);
-        }}
-      >
-        Restart
-      </button>
+      <button onClick={() => restartPomodoro()}>Restart</button>
     </div>
   );
 }

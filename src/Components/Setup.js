@@ -15,14 +15,14 @@ function Setup(props) {
   function handleChange(event) {
     setStartTime(parseInt(event.target.value));
     if (workOrPauseState === "work") {
-      setDisplayedTime(parseInt(event.target.value));
+      setDisplayedTime(parseInt(event.target.value) * 60);
     }
   }
 
   function handleChangeResting(event) {
     setStartRestingTime(parseInt(event.target.value));
     if (workOrPauseState === "pause") {
-      setDisplayedTime(parseInt(event.target.value));
+      setDisplayedTime(parseInt(event.target.value) * 60);
     }
   }
 
@@ -39,7 +39,7 @@ function Setup(props) {
         type="number"
         name="worktime"
         min="1"
-        max="25"
+        max="50"
       ></input>
 
       <label name="restingtime">Resting Time :</label>

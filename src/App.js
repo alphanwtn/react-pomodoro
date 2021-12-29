@@ -7,11 +7,14 @@ import AudioSection from "./Components/AudioSection";
 import Sessions from "./Components/Sessions";
 
 function App() {
+  /*   startTime et startRestingTime sont en minutes, displayedTime doit contenir l'équivalent en secondes.
+  La traduction sous format "clock" se fait dans Timer */
+
   const [startTime, setStartTime] = useState(25);
   const [startRestingTime, setStartRestingTime] = useState(5);
   const [nbSessions, setNbSessions] = useState(4);
   const [currentSession, setCurrentSession] = useState(1);
-  const [displayedTime, setDisplayedTime] = useState(startTime);
+  const [displayedTime, setDisplayedTime] = useState(startTime * 60);
   const [running, setRunning] = useState(false);
   const [alarmRing, setAlarmRing] = useState(false);
   const [workOrPauseState, setWorkOrPauseState] = useState("work"); // other state : pause
@@ -32,9 +35,6 @@ function App() {
       setAlarmRing(true);
       console.log("setalarm");
       return () => setAlarmRing(false);
-    } else if (displayedTime === startTime) {
-      setAlarmRing(false);
-      console.log("stopalarm");
     }
   });
 
@@ -46,14 +46,14 @@ function App() {
       displayedTime === 0
     ) {
       setWorkOrPauseState("pause");
-      setDisplayedTime(startRestingTime);
+      setDisplayedTime(startRestingTime * 60);
     } else if (
       running === false &&
       workOrPauseState === "pause" &&
       displayedTime === 0
     ) {
       setWorkOrPauseState("work");
-      setDisplayedTime(startTime);
+      setDisplayedTime(startTime * 60);
       setCurrentSession(currentSession + 1);
     }
   });
@@ -64,7 +64,7 @@ function App() {
         <img
           src="https://images.caradisiac.com/logos/4/6/6/4/194664/S0-fiat-chrysler-annonce-des-milliers-d-emplois-aux-etats-unis-111938.jpg"
           style={{ width: "1080px", height: "auto" }}
-          alt="Trump photo"
+          alt="Trump"
         />
         <AudioSection alarmRing={alarmRing}></AudioSection>
       </div>
@@ -79,20 +79,20 @@ function App() {
           setDisplayedTime={setDisplayedTime}
           setRunning={setRunning}
           startTime={startTime}
-          workOrPauseState={workOrPauseState}
           setWorkOrPauseState={setWorkOrPauseState}
           setCurrentSession={setCurrentSession}
+          workOrPauseState={workOrPauseState}
         />
 
         <Setup
           setDisplayedTime={setDisplayedTime}
-          workOrPauseState={workOrPauseState}
           setStartTime={setStartTime}
           startTime={startTime}
           setStartRestingTime={setStartRestingTime}
           startRestingTime={startRestingTime}
           nbSessions={nbSessions}
           setNbSessions={setNbSessions}
+          workOrPauseState={workOrPauseState}
         />
         <AudioSection alarmRing={alarmRing}></AudioSection>
       </div>
