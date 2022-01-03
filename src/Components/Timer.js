@@ -14,10 +14,9 @@ function Timer(props) {
 
   return (
     <div
+      id="timer-field"
       style={
-        workOrPauseState === "work"
-          ? { color: "red", fontSize: "100px" }
-          : { color: "green", fontSize: "100px" }
+        workOrPauseState === "work" ? { color: "red" } : { color: "green" }
       }
     >
       {secondsToCLock(toDisplay)}

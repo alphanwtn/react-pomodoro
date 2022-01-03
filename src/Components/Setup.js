@@ -1,4 +1,5 @@
 import React from "react";
+import { TextField } from "@mui/material";
 
 function Setup(props) {
   const {
@@ -31,36 +32,48 @@ function Setup(props) {
   }
 
   return (
-    <div>
-      <label name="worktime">Work Time :</label>
-      <input
+    <div id="setup-field">
+      <TextField
+        InputLabelProps={{
+          style: { color: "#fff" },
+        }}
+        InputProps={{ inputProps: { min: 1, max: 99 } }}
+        type="number"
         value={startTime}
+        sx={{ width: "25%" }}
+        size="small"
+        label="Work Time"
+        variant="standard"
         onChange={handleChange}
-        type="number"
-        name="worktime"
-        min="1"
-        max="50"
-      ></input>
+      />
 
-      <label name="restingtime">Resting Time :</label>
-      <input
+      <TextField
+        InputLabelProps={{
+          style: { color: "#fff" },
+        }}
+        InputProps={{ inputProps: { min: 1, max: 99 } }}
+        type="number"
         value={startRestingTime}
+        sx={{ width: "25%" }}
+        size="small"
+        label="Rest Time"
+        variant="standard"
         onChange={handleChangeResting}
-        type="number"
-        name="restingtime"
-        min="1"
-        max="25"
-      ></input>
+      />
 
-      <label name="nbsessions">Sessions Number :</label>
-      <input
-        value={nbSessions}
-        onChange={handleChangeNbSessions}
+      <TextField
+        InputLabelProps={{
+          style: { color: "#fff" },
+        }}
+        InputProps={{ inputProps: { min: 1, max: 99 } }}
         type="number"
-        name="nbsessions"
-        min="1"
-        max="10"
-      ></input>
+        value={nbSessions}
+        sx={{ width: "25%" }}
+        size="small"
+        label="Sessions Number"
+        variant="standard"
+        onChange={handleChangeNbSessions}
+      />
     </div>
   );
 }

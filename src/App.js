@@ -5,6 +5,7 @@ import Timer from "./Components/Timer";
 import Setup from "./Components/Setup";
 import AudioSection from "./Components/AudioSection";
 import Sessions from "./Components/Sessions";
+import { Container } from "@mui/material";
 
 function App() {
   /*   startTime et startRestingTime sont en minutes, displayedTime doit contenir l'équivalent en secondes.
@@ -71,29 +72,43 @@ function App() {
     );
   } else {
     return (
-      <div className="App">
-        <Timer toDisplay={displayedTime} workOrPauseState={workOrPauseState} />
-        <Sessions currentSession={currentSession} nbSessions={nbSessions} />
-        <Player
-          running={running}
-          setDisplayedTime={setDisplayedTime}
-          setRunning={setRunning}
-          startTime={startTime}
-          setWorkOrPauseState={setWorkOrPauseState}
-          setCurrentSession={setCurrentSession}
-          workOrPauseState={workOrPauseState}
-        />
+      <div>
+        <Container id="app-field" maxWidth="sm">
+          <Timer
+            toDisplay={displayedTime}
+            workOrPauseState={workOrPauseState}
+          />
+          <Sessions
+            currentSession={currentSession}
+            nbSessions={nbSessions}
+            workOrPauseState={workOrPauseState}
+          />
 
-        <Setup
-          setDisplayedTime={setDisplayedTime}
-          setStartTime={setStartTime}
-          startTime={startTime}
-          setStartRestingTime={setStartRestingTime}
-          startRestingTime={startRestingTime}
-          nbSessions={nbSessions}
-          setNbSessions={setNbSessions}
-          workOrPauseState={workOrPauseState}
-        />
+          <Setup
+            id="setup-field"
+            setDisplayedTime={setDisplayedTime}
+            setStartTime={setStartTime}
+            startTime={startTime}
+            setStartRestingTime={setStartRestingTime}
+            startRestingTime={startRestingTime}
+            nbSessions={nbSessions}
+            setNbSessions={setNbSessions}
+            workOrPauseState={workOrPauseState}
+          />
+          <Player
+            id="player-field"
+            running={running}
+            setDisplayedTime={setDisplayedTime}
+            setRunning={setRunning}
+            startTime={startTime}
+            setWorkOrPauseState={setWorkOrPauseState}
+            setCurrentSession={setCurrentSession}
+            workOrPauseState={workOrPauseState}
+          />
+        </Container>
+        <p id="signature">
+          Pomodoro <em>by Alpha Nwtn</em>
+        </p>
         <AudioSection alarmRing={alarmRing}></AudioSection>
       </div>
     );

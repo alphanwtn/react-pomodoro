@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "@mui/material/Button";
+import { ButtonGroup } from "@mui/material";
 
 function Player(props) {
   const {
@@ -12,18 +14,25 @@ function Player(props) {
 
   function restartPomodoro() {
     setRunning(false);
-    setDisplayedTime(startTime);
+    setDisplayedTime(startTime * 60);
     setWorkOrPauseState("work");
     setCurrentSession(1);
   }
 
   return (
-    <div>
-      <button onClick={() => setRunning(true)}>
-        Start {workOrPauseState === "work" ? "Working" : "Resting"}
-      </button>
-      <button onClick={() => setRunning(false)}>Pause</button>
-      <button onClick={() => restartPomodoro()}>Restart</button>
+    <div id="player-field">
+      <ButtonGroup
+        variant="text"
+        color="primary"
+        aria-label="text button group"
+        fullWidth
+      >
+        <Button onClick={() => setRunning(true)}>
+          Start {workOrPauseState === "work" ? "Working" : "Resting"}
+        </Button>
+        <Button onClick={() => setRunning(false)}>Pause</Button>
+        <Button onClick={() => restartPomodoro()}>Restart</Button>
+      </ButtonGroup>
     </div>
   );
 }

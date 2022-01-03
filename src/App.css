@@ -1,38 +1,40 @@
-.App {
+body {
+  font-family: "roboto", serif;
   text-align: center;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#app-field {
+  border: 3px grey solid;
+  border-radius: 15px;
+  top: 50%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#timer-field {
+  font-size: 100px;
+  padding: 0;
+}
+#session-field {
+  padding: 20px 0 20px 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#setup-field {
+  padding: 20px 0 20px 0;
 }
 
-.App-link {
-  color: #61dafb;
+#setup-field div {
+  padding: 0px 10px 0px 10px;
+  color: grey;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#player-field {
+  padding: 20px 0 20px 0;
+  border-top: 1px grey solid;
+  width: 100%;
+}
+
+#signature {
+  color: grey;
+
+  font-size: 0.8em;
 }
